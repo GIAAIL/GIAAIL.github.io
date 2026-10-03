@@ -1,0 +1,38 @@
+---
+/** GitHub Pages serves this for any unknown address. Bilingual, since the language is unknown. */
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/components.css';
+import Logo from '../components/Logo.astro';
+import { ui } from '../i18n/ui';
+import { href } from '../i18n/utils';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{ui.en['notfound.title']} – AIL</title>
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Noto+Sans+TC:wght@400;500;600&display=swap" />
+  </head>
+  <body>
+    <main class="page">
+      <p class="crumbs" style="color: var(--fg)"><span style="display:inline-block;width:34px;height:34px;vertical-align:middle;margin-right:12px"><Logo /></span>{ui.en['site.name']}</p>
+      <div class="about" style="margin-top: var(--sp-48)">
+        <div>
+          <h1 class="page-title">{ui.en['notfound.title']}</h1>
+          <p class="lede" style="margin-top: var(--sp-18)">{ui.en['notfound.body']}</p>
+          <a class="more" href={href('en', '')}>{ui.en['notfound.home']}</a>
+        </div>
+        <div lang="zh-Hant">
+          <h1 class="page-title">{ui.zh['notfound.title']}</h1>
+          <p class="lede" style="margin-top: var(--sp-18)">{ui.zh['notfound.body']}</p>
+          <a class="more" href={href('zh', '')}>{ui.zh['notfound.home']}</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

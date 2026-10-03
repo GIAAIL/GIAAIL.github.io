@@ -1,0 +1,24 @@
+---
+/**
+ * One supervised thesis in People › Alumni: figure (→ thesis page), author (→ their own link, once
+ * one is filled in), degree, current position, thesis title (→ thesis page), links.
+ */
+import type { Alumnus } from '../lib/content';
+import { pick, type Lang } from '../i18n/utils';
+import { displayName, degreeLine, thesisTitle, thesisTitleLang, thesisPage, thesisImage, personalLink } from '../lib/people';
+import PersonLinks from './PersonLinks.astro';
+
+interface Props { alumnus: Alumnus; lang: Lang }
+const { alumnus, lang } = Astro.props;
+const { person, thesis, anchor } = alumnus;
+const th = thesis?.data;
+const img = th ? thesisImage(th) : null;
+const href = thesis ? thesisPage(thesis, lang) : undefined;
+const degree = th ? degreeLine(th, lang) : person.data.degree;
+const title = th ? thesisTitle(th, lang) : undefined;
+const titleLang = th ? thesisTitleLang(th, lang) : undefined;
+const affiliation = pick(person.data, 'affiliation', lang);
+const name = displayName(person.data, lang);
+const own = personalLink(person.data);
+---
+<article class="tile alumnus" id={anchor ? person.id : thesis?.id}>{href ? <a class="img" href={href} tabindex="-1" aria-hidden="true">{img && <img src={img} alt="" width="800" height="600" loading="lazy" decoding="async" style={th?.focus ? `object-position:${th.focus}` : undefined} />}</a> : <div class="img"></div>}{own ? <a class="t" href={own}>{name}</a> : <span class="t">{name}</span>}{degree && <p class="m">{degree}</p>}{affiliation && <p class="m">{affiliation}</p>}{title && <p class="m th" lang={titleLang}>{href ? <a href={href}>{title}</a> : title}</p>}<PersonLinks person={person} lang={lang} /></article>

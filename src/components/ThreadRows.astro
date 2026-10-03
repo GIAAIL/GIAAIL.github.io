@@ -1,0 +1,13 @@
+---
+/** Thread rows: mark + name (→ thread page), one-line summary, publication count. Home Research panel and the Research page. */
+import type { Thread } from '../lib/content';
+import { href, pick, type Lang } from '../i18n/utils';
+
+interface Props { threads: Thread[]; counts: Record<string, number>; lang: Lang }
+const { threads, counts, lang } = Astro.props;
+---
+<ol class="threads">
+  {threads.map((th) => (
+    <li><span class="name"><span class="mark" style={`--mk:${th.data.color}`}></span><a href={href(lang, `research/${th.id}/`)}>{pick(th.data, 'name', lang)}</a></span><span class="sum">{pick(th.data, 'line', lang)}</span><span class="n">{counts[th.id] ?? 0}</span></li>
+  ))}
+</ol>

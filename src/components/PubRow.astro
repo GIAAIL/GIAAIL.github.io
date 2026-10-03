@@ -1,0 +1,32 @@
+---
+/**
+ * Publication list row (Publications page). Same structure as the home page's publication rows;
+ * a thumbnail appears only when the paper has a real image. data-* attributes drive the filters.
+ */
+import type { Pub, Thread } from '../lib/content';
+import { href, pick, useTranslations, type Lang } from '../i18n/utils';
+import { pubImage, authorsHtml, venueLine } from '../lib/pubs';
+
+interface Props { pub: Pub; lang: Lang; thread?: Thread['data'] }
+const { pub, lang, thread } = Astro.props;
+const t = useTranslations(lang);
+const d = pub.data;
+const url = href(lang, `publications/${pub.id}/`);
+const img = pubImage(d);
+const text = [d.title, ...d.authors, d.venue, d.venueShort, d.location, String(d.year)].filter(Boolean).join(' ').toLowerCase();
+---
+<li class={img ? 'has-thumb' : undefined} data-filter-item data-type={d.type} data-thread={d.theme ?? ''} data-text={text}>
+  {img && <a class="thumb" href={url} tabindex="-1" aria-hidden="true"><img src={img} alt="" width="1200" height="900" loading="lazy" decoding="async" /></a>}
+  <div>
+    <div class="t"><a href={url}>{d.title}</a></div>
+    <p class="m"><Fragment set:html={authorsHtml(d.authors)} /> · {venueLine(d)}{thread && <> · <span class="mark" style={`--mk:${thread.color}`}></span>{pick(thread, 'label', lang)}</>}</p>
+    {(d.doiUrl || d.pdf || d.url || d.video) && (
+      <p class="l">
+        {d.doiUrl && <a href={d.doiUrl} rel="noopener">{t('pubs.doi')}</a>}
+        {d.pdf && <a href={d.pdf} rel="noopener">{t('pubs.pdf')}</a>}
+        {!d.doiUrl && d.url && <a href={d.url} rel="noopener">{t('pubs.page')}</a>}
+        {d.video && <a href={d.video} rel="noopener">{t('pubs.video')}</a>}
+      </p>
+    )}
+  </div>
+</li>

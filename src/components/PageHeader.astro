@@ -1,0 +1,10 @@
+---
+/** Title block of a section page: optional breadcrumb, title, optional lede. */
+interface Props { title: string; lede?: string; crumb?: { href: string; label: string } }
+const { title, lede, crumb } = Astro.props;
+---
+<header class="page-head">
+  {crumb && <p class="crumbs"><a href={crumb.href}>{crumb.label}</a></p>}
+  <h1 class="page-title"><slot name="before" />{title}</h1>
+  {lede && <p class="lede">{lede}</p>}
+</header>

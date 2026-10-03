@@ -1,0 +1,12 @@
+---
+/** Image-first publication tile (home Publications panel, Research pages, related papers). */
+import type { Pub } from '../lib/content';
+import { href, type Lang } from '../i18n/utils';
+import { pubImage, venueWithYear, formatAuthors } from '../lib/pubs';
+
+interface Props { pub: Pub; lang: Lang; color?: string; eager?: boolean }
+const { pub, lang, color, eager = false } = Astro.props;
+const d = pub.data;
+const img = pubImage(d);
+---
+<article class="tile" style={color ? `--mk:${color}` : undefined}><div class="img">{img && <img src={img} alt={d.imageAlt ?? ''} width="1200" height="900" loading={eager ? 'eager' : 'lazy'} decoding="async" />}</div><a class="t" href={href(lang, `publications/${pub.id}/`)}>{d.title}</a><p class="m">{formatAuthors(d.authors)} · {venueWithYear(d)}</p></article>

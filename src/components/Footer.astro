@@ -1,0 +1,26 @@
+---
+/** Site footer for the section pages (the home page's About panel carries the same contact block). */
+import site from '../data/site.json';
+import { useTranslations, href, type Lang } from '../i18n/utils';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div>
+    <p><b>{t('site.name')}</b></p>
+    <p>{t('site.affiliation')}</p>
+    <p>{site.address[lang].join(lang === 'zh' ? ' ' : ', ')}</p>
+  </div>
+  <ul>
+    <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+    <li><a href={site.links.institute} rel="noopener">arch.nycu.edu.tw</a></li>
+    <li><a href={base + site.links.bib} download>{t('footer.bib')}</a></li>
+    <li><a href={href(lang, 'about/') + '#join'}>{t('about.join')}</a></li>
+    <li>© {year}</li>
+  </ul>
+</footer>

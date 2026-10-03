@@ -1,0 +1,82 @@
+---
+/**
+ * Every page: <head>, the shared header, and (on section pages) the footer.
+ *   variant="page" (default) wraps the content in <main class="page">.
+ *   variant="home" leaves <main> to the page (the drum) and starts the body flat;
+ *   an inline script switches to the drum before first paint unless motion is reduced.
+ */
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/chrome.css';
+import '../styles/components.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+import { useTranslations, alternates, htmlLang, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  image?: string;
+  variant?: 'home' | 'page';
+}
+
+const { lang, title, description, image, variant = 'page' } = Astro.props;
+const t = useTranslations(lang);
+const siteName = t('site.name');
+const fullTitle = title ? `${title} – ${t('site.short')}` : `${siteName} – ${t('site.university')}`;
+const desc = description ?? t('site.description');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image ?? `${import.meta.env.BASE_URL}og.png`, Astro.site);
+const home = variant === 'home';
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    {alternates(Astro.url, Astro.site).map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon-32.png`} type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
+    <meta name="theme-color" content="#1b1a19" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_TW' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..800;1,62..125,300..800&family=Noto+Sans+TC:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ResearchOrganization',
+      name: 'Architectural Informatics Lab',
+      alternateName: ['AIL', '建築資訊學研究室', 'GIA AIL'],
+      url: Astro.site?.toString(),
+      email: site.email,
+      parentOrganization: {
+        '@type': 'CollegeOrUniversity',
+        name: 'National Yang Ming Chiao Tung University',
+        department: { '@type': 'Organization', name: 'Graduate Institute of Architecture', url: site.links.institute },
+      },
+      address: { '@type': 'PostalAddress', ...site.postal },
+    })} />
+    <slot name="head" />
+  </head>
+  <body class={home ? 'home flat' : undefined}>
+    {home && <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.remove('flat');</script>}
+    <a class="skip" href="#main">{t('common.skip')}</a>
+    <slot name="behind" />
+    <Header lang={lang} />
+    {home ? <slot /> : <main id="main" class="page"><slot /></main>}
+    {!home && <Footer lang={lang} />}
+  </body>
+</html>

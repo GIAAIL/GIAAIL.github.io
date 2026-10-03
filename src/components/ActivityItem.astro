@@ -1,0 +1,53 @@
+---
+/**
+ * One activity. compact = the home panel's three-column item (type · year, title, place);
+ * full = the Activities page row: date, title (→ link), work shown, venue and place, funder,
+ * credit, text, related papers, image when there is one. data-* attributes drive the filters.
+ */
+import { render } from 'astro:content';
+import type { Activity } from '../lib/content';
+import { publicationsBySlug } from '../lib/content';
+import { href, pick, useTranslations, type Lang } from '../i18n/utils';
+import { imageIfExists } from '../lib/assets';
+
+interface Props { activity: Activity; lang: Lang; full?: boolean }
+const { activity, lang, full = false } = Astro.props;
+const t = useTranslations(lang);
+const d = activity.data;
+const type = t(`activities.type.${d.type}` as any);
+const sep = lang === 'zh' ? '，' : ', ';
+const where = [pick(d, 'venue', lang), pick(d, 'place', lang)].filter(Boolean).join(sep) || pick(d, 'funder', lang);
+const title = pick(d, 'title', lang);
+let Body: any = null, related: Awaited<ReturnType<typeof publicationsBySlug>> = [], img: string | null = null, text = '';
+if (full) {
+  Body = (await render(activity)).Content;
+  related = await publicationsBySlug(d.publications);
+  img = imageIfExists(d.image);
+  text = [d.title, d.title_zh, d.venue, d.venue_zh, d.place, d.place_zh, d.work, d.work_zh, d.credit, d.credit_zh, d.funder, d.funder_zh, d.grantId, ...d.people]
+    .filter(Boolean).join(' ').toLowerCase();
+}
+const work = pick(d, 'work', lang);
+const funder = pick(d, 'funder', lang);
+const credit = pick(d, 'credit', lang);
+---
+{full ? (
+  <li data-filter-item data-type={d.type} data-text={text} id={activity.id}>
+    <div>
+      <div class="k">{type}{(d.dateLabel ?? d.year) && ` · ${d.dateLabel ?? d.year}`}</div>
+      <div class="t">{d.link ? <a href={d.link} rel="noopener">{title}</a> : title}</div>
+      {work && <div class="m work">{work}</div>}
+      {where && where !== funder && <div class="m">{where}</div>}
+      {funder && <div class="m">{funder}{d.grantId && ` · ${d.grantId}`}</div>}
+      {credit && <div class="m">{credit}</div>}
+    </div>
+    <div>
+      {img && <div class="tile"><div class="img"><img src={img} alt="" width="1200" height="900" loading="lazy" decoding="async" /></div></div>}
+      <div class="body">{lang === 'zh' && d.summary_zh ? <p>{d.summary_zh}</p> : <Body />}</div>
+      {related.length > 0 && (
+        <div class="rel"><span>{t('activities.related')}</span>{related.map((p) => <a href={href(lang, `publications/${p.id}/`)}>{p.data.title}</a>)}</div>
+      )}
+    </div>
+  </li>
+) : (
+  <li><div class="k">{type} · {d.year}</div><div class="t">{title}</div>{where && <div class="m">{where}</div>}</li>
+)}

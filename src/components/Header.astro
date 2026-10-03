@@ -1,0 +1,45 @@
+---
+/**
+ * Site header, shared by every page: GIA mark + lab name (→ home), the five sections,
+ * and the language switch. Same markup as the approved home page; the links are real.
+ */
+import Logo from './Logo.astro';
+import { useTranslations, href, switchLangPath, htmlLang, type Lang } from '../i18n/utils';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'en' ? 'zh' : 'en';
+const items = [
+  ['research/', t('nav.research')],
+  ['publications/', t('nav.publications')],
+  ['people/', t('nav.people')],
+  ['activities/', t('nav.activities')],
+  ['about/', t('nav.about')],
+] as const;
+const current = Astro.url.pathname;
+const isActive = (path: string) => current.startsWith(href(lang, path));
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href={href(lang, '')} aria-label={`${t('site.name')}, ${t('site.brandSub')}`} data-home>
+      <Logo />
+      <span><span class="brand-name">{t('site.name')}</span><span class="brand-sub">{t('site.brandSub')}</span></span>
+    </a>
+    <nav aria-label={t('nav.label')}><ul>
+      {items.map(([path, label]) => <li><a href={href(lang, path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a></li>)}
+      <li class="sw"><a href={switchLangPath(Astro.url, other)} lang={htmlLang[other]} hreflang={htmlLang[other]} aria-label={t('nav.switchLabel')} data-lang-switch>{t('nav.switch')}</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<script>
+  // Keep the visitor's filters and anchor when switching language: /en/publications/?thread=xr → /zh/publications/?thread=xr
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]')) {
+    const carry = () => { a.href = a.href.split(/[?#]/)[0] + location.search + location.hash; };
+    a.addEventListener('pointerdown', carry);
+    a.addEventListener('focus', carry);
+    a.addEventListener('click', carry);
+  }
+</script>

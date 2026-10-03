@@ -1,0 +1,17 @@
+---
+/** A thesis: main figure, title (→ the thesis page), author and degree. Research thread pages, paper pages. */
+import { getEntry } from 'astro:content';
+import type { Thesis } from '../lib/content';
+import { type Lang } from '../i18n/utils';
+import { shortName, degreeLine, thesisTitle, thesisTitleLang, thesisPage, thesisImage } from '../lib/people';
+
+interface Props { thesis: Thesis; lang: Lang; color?: string }
+const { thesis, lang, color } = Astro.props;
+const d = thesis.data;
+const person = await getEntry(d.person);
+const img = thesisImage(d);
+const href = thesisPage(thesis, lang);
+const title = thesisTitle(d, lang);
+const titleLang = thesisTitleLang(d, lang);
+---
+<article class="tile" style={color ? `--mk:${color}` : undefined}><a class="img" href={href} tabindex="-1" aria-hidden="true">{img && <img src={img} alt="" width="800" height="600" loading="lazy" decoding="async" style={d.focus ? `object-position:${d.focus}` : undefined} />}</a><a class="t" href={href} lang={titleLang}>{title}</a><p class="m">{person ? shortName(person.data, lang) : ''} · {degreeLine(d, lang)}</p></article>

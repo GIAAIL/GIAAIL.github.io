@@ -1,0 +1,25 @@
+---
+/**
+ * A person as a compact item (role, name, years, current position elsewhere). Used by the home
+ * People panel and the Members lists. `full` shows both names on Chinese pages, earlier theses in the lab and links;
+ * `portrait` adds the 4:5 photo frame (empty frame when the photo is missing).
+ */
+import type { Person, Thesis } from '../lib/content';
+import { pick, useTranslations, type Lang } from '../i18n/utils';
+import { imageIfExists } from '../lib/assets';
+import { displayName, shortName, degreeLine, thesisPage, personalLink } from '../lib/people';
+import PersonLinks from './PersonLinks.astro';
+
+interface Props { person: Person; lang: Lang; label?: string; full?: boolean; portrait?: boolean; theses?: Thesis[] }
+const { person, lang, label, full = false, portrait = false, theses = [] } = Astro.props;
+const t = useTranslations(lang);
+const d = person.data;
+const name = full ? displayName(d, lang) : shortName(d, lang);
+const role = label ?? pick(d, 'title', lang) ?? t(`people.role.${d.role}` as any);
+const meta = d.role === 'director' ? pick(d, 'title', lang) : d.years;
+const earlier = full ? theses : [];
+const affiliation = pick(d, 'affiliation', lang);   // current position elsewhere, shown everywhere (home included)
+const img = portrait ? imageIfExists(d.image) : null;
+const own = personalLink(d);   // the name links out once the person has a link in data/people.xlsx
+---
+<li id={full ? person.id : undefined}>{portrait && <div class="portrait">{img && <img src={img} alt="" width="600" height="750" loading="lazy" decoding="async" />}</div>}<div class="k">{role}</div><div class="t">{own ? <a href={own}>{name}</a> : name}</div>{meta && <div class="m">{meta}</div>}{earlier.length > 0 && <div class="m th">{earlier.map((x, i) => <>{i > 0 && '; '}<a href={thesisPage(x, lang)}>{degreeLine(x.data, lang)}</a></>)}</div>}{affiliation && <div class="m">{affiliation}</div>}{full && <PersonLinks person={person} lang={lang} />}</li>

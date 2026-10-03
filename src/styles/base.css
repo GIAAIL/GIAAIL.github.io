@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------------------
+   Base: element-level rules only, exactly those of the approved home page.
+   Do not add element rules here (p, h1, ul …): the home page relies on browser
+   defaults for its untouched elements. Page-level styles go in components.css
+   under a class.
+   --------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--fs-body) / var(--lh-body) var(--font);
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: var(--wdth-body);
+}
+img { max-width: 100%; }
+[hidden]:not([hidden='until-found' i]) { display: none !important; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* page-to-page cross-fade where the browser supports cross-document view transitions */
+@view-transition { navigation: auto; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip {
+  position: fixed; left: var(--gutter); top: var(--sp-8); z-index: 40;
+  padding: var(--sp-6) var(--sp-12); background: var(--fg); color: var(--bg);
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }

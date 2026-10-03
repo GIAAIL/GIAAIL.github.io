@@ -1,0 +1,89 @@
+---
+/**
+ * People: Director; current members grouped PhD / MS / others; Alumni = every thesis supervised
+ * since 2007 (current members' earlier theses too), grouped PhD / MS. Data: data/people.xlsx.
+ */
+import { render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import PersonItem from '../../../components/PersonItem.astro';
+import PersonLinks from '../../../components/PersonLinks.astro';
+import AlumnusTile from '../../../components/AlumnusTile.astro';
+import { useTranslations, pick, langPaths, type Lang } from '../../../i18n/utils';
+import { director, members, alumni, thesesByPerson } from '../../../lib/content';
+import { displayName } from '../../../lib/people';
+import { imageIfExists } from '../../../lib/assets';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+
+const head = await director();
+const team = await members();
+const byPerson = await thesesByPerson();
+const alums = await alumni();
+
+const groups = [
+  { label: t('people.phd'), list: team.filter((p) => p.data.role === 'phd') },
+  { label: t('people.ms'), list: team.filter((p) => p.data.role === 'master') },
+  { label: t('people.others'), list: team.filter((p) => !['phd', 'master'].includes(p.data.role)) },
+].filter((g) => g.list.length > 0);
+// portrait frames appear in a group only once someone in it has a photo
+const withPortraits = (list: typeof team) => list.some((p) => imageIfExists(p.data.image));
+
+const alumniGroups = [
+  { label: t('people.alumniPhd'), list: alums.filter((a) => a.level === 'PhD') },
+  { label: t('people.alumniMs'), list: alums.filter((a) => a.level === 'MS') },
+].filter((g) => g.list.length > 0);
+
+const Bio = head ? (await render(head)).Content : null;
+const portrait = head ? imageIfExists(head.data.image) : null;
+---
+
+<Base lang={lang} title={t('people.title')}>
+  <PageHeader title={t('people.title')} />
+
+  {head && (
+    <section class="block" id={head.id}>
+      <div class={`director${portrait ? ' has-portrait' : ''}`}>
+        {portrait && <div class="portrait"><img src={portrait} alt={head.data.name} width="600" height="750" /></div>}
+        <div>
+          <div class="acts"><div class="k">{t('people.director')}</div></div>
+          <h2 class="director-name">{displayName(head.data, lang)}</h2>
+          <p class="director-title">{pick(head.data, 'title', lang)}</p>
+          <div class="prose" style="margin-top: var(--sp-24)">{lang === 'zh' && head.data.bio_zh ? <p>{head.data.bio_zh}</p> : Bio && <Bio />}</div>
+          <PersonLinks person={head} lang={lang} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  {groups.length > 0 && (
+    <section class="block" id="members">
+      <div class="head"><h2 class="sec">{t('people.members')}</h2></div>
+      {groups.map((g) => (
+        <>
+          <h3 class="sub">{g.label}</h3>
+          <ul class="acts">
+            {g.list.map((p) => <PersonItem person={p} lang={lang} full portrait={withPortraits(g.list)} theses={byPerson.get(p.id)} />)}
+          </ul>
+        </>
+      ))}
+    </section>
+  )}
+
+  {alumniGroups.length > 0 && (
+    <section class="block" id="alumni">
+      <div class="head"><h2 class="sec">{t('people.alumni')}</h2></div>
+      <p class="block-desc">{t('people.alumniLede')}</p>
+      {alumniGroups.map((g) => (
+        <>
+          <h3 class="sub">{g.label}</h3>
+          <div class="grid">
+            {g.list.map((a) => <AlumnusTile alumnus={a} lang={lang} />)}
+          </div>
+        </>
+      ))}
+    </section>
+  )}
+</Base>

@@ -1,0 +1,62 @@
+---
+/** All publications: filter by type, thread and text; grouped by year (newest first). */
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import PubRow from '../../../components/PubRow.astro';
+import { useTranslations, pick, langPaths, type Lang } from '../../../i18n/utils';
+import { publications, threads, threadById } from '../../../lib/content';
+import site from '../../../data/site.json';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+
+const pubs = await publications();
+const threadList = await threads();
+const byId = await threadById();
+const years = [...new Set(pubs.map((p) => p.data.year))];
+const types = (['journal', 'conference', 'book', 'other'] as const).filter((ty) => pubs.some((p) => p.data.type === ty));
+const base = import.meta.env.BASE_URL;
+---
+
+<Base lang={lang} title={t('pubs.title')}>
+  <PageHeader title={t('pubs.title')} />
+
+  <form class="filters" data-filter role="search" aria-label={t('pubs.title')}>
+    <div class="field">
+      <label for="f-type">{t('pubs.filter.type')}</label>
+      <select id="f-type" name="type">
+        <option value="">{t('pubs.filter.all')}</option>
+        {types.map((ty) => <option value={ty}>{t(`pubs.type.${ty}` as any)}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-thread">{t('pubs.filter.thread')}</label>
+      <select id="f-thread" name="thread">
+        <option value="">{t('pubs.filter.all')}</option>
+        {threadList.map((th) => <option value={th.id}>{pick(th.data, 'label', lang)}</option>)}
+      </select>
+    </div>
+    <div class="field grow">
+      <label for="f-q">{t('pubs.filter.search')}</label>
+      <input id="f-q" name="q" type="search" autocomplete="off" />
+    </div>
+    <a class="more" href={base + site.links.bib} download>{t('pubs.bibtex')}</a>
+    <p class="visually-hidden" aria-live="polite" data-filter-count data-label={t('pubs.results')}></p>
+  </form>
+
+  {years.map((y) => (
+    <section class="group" data-filter-group>
+      <h2 class="year">{y}</h2>
+      <ul class="pubs">
+        {pubs.filter((p) => p.data.year === y).map((p) => <PubRow pub={p} lang={lang} thread={p.data.theme ? byId[p.data.theme] : undefined} />)}
+      </ul>
+    </section>
+  ))}
+  <p class="empty" hidden data-filter-empty>{t('pubs.empty')}</p>
+</Base>
+
+<script>
+  import { initFilter } from '../../../scripts/filter.js';
+  initFilter();
+</script>

@@ -1,0 +1,86 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — the single source for colour, type and spacing on every page.
+
+   Values are taken from the approved home page ("AIL Lattice Room"); the home page
+   renders exactly as the prototype did, and the section pages draw from the same set.
+   Thread colours live in src/data/themes.json (one hue per research thread).
+   --------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: dark;
+
+  /* colour */
+  --bg: #1b1a19;
+  --fg: #f3f1ee;
+  --fg-2: #a3a09c;
+  --fg-3: #6f6c68;
+  --rule: rgba(255, 255, 255, 0.12);
+  --surface: rgba(27, 26, 25, 0.88);
+  --scrim: rgba(27, 26, 25, 0.85);          /* header gradient, top */
+  --scrim-0: rgba(27, 26, 25, 0);           /* header gradient, bottom */
+  --vignette: rgba(27, 26, 25, 0.6);
+  --placeholder: #201f1e;                   /* image placeholder ground */
+  --placeholder-dot: rgba(255, 255, 255, 0.14);
+  --accent: #4d6bff;                        /* focus ring; = the simulation thread */
+
+  /* type */
+  --font: 'Archivo', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --fs-body: 17px;
+  --lh-body: 1.5;
+  --fs-display: clamp(2.6rem, 1.2rem + 5.2vw, 5.6rem);   /* home title */
+  --fs-title: clamp(2.2rem, 1.3rem + 3vw, 3.6rem);       /* page titles */
+  --fs-section: clamp(1.6rem, 1.1rem + 1.8vw, 2.4rem);   /* section headings */
+  --fs-tagline: clamp(1.125rem, 1rem + 0.7vw, 1.5rem);
+  --fs-lede: 1.0625rem;
+  --fs-ui: 0.9375rem;                       /* navigation, links, secondary text */
+  --fs-meta: 0.875rem;
+  --fs-micro: 0.8125rem;
+  --lh-display: 0.98;
+  --lh-tagline: 1.38;
+  --lh-tight: 1.3;
+  --lh-brand: 1.2;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 600;
+  --track-display: -0.03em;
+  --track-section: -0.02em;
+  --track-brand: -0.005em;
+  --wdth-body: 'wdth' 100;
+  --wdth-display: 'wdth' 112;
+  --wdth-section: 'wdth' 108;
+
+  /* spacing — px, on the prototype's 2px rhythm */
+  --sp-2: 2px;
+  --sp-4: 4px;
+  --sp-6: 6px;
+  --sp-8: 8px;
+  --sp-10: 10px;
+  --sp-12: 12px;
+  --sp-14: 14px;
+  --sp-16: 16px;
+  --sp-18: 18px;
+  --sp-20: 20px;
+  --sp-22: 22px;
+  --sp-24: 24px;
+  --sp-26: 26px;
+  --sp-28: 28px;
+  --sp-32: 32px;
+  --sp-40: 40px;
+  --sp-48: 48px;
+  --sp-64: 64px;
+  --sp-80: 80px;
+  --sp-120: 120px;
+
+  /* layout */
+  --wrap: 1180px;                           /* content width (home panels, page bodies) */
+  --wrap-nav: 1280px;                       /* header width */
+  --gutter: var(--sp-24);
+  --rule-w: 1px;
+  --radius: 2px;
+  --brand-mark: 34px;
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: var(--sp-16); }
+}

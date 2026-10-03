@@ -1,0 +1,18 @@
+{
+  "email": "jhou@arch.nycu.edu.tw",
+  "director": "june-hao-hou",
+  "address": {
+    "en": ["Humanities and Social Sciences Building I, 1001 University Road", "Hsinchu 300093, Taiwan"],
+    "zh": ["300093 新竹市大學路 1001 號", "人社一館"]
+  },
+  "links": {
+    "institute": "https://arch.nycu.edu.tw/",
+    "bib": "bib/ail.bib"
+  },
+  "postal": {
+    "streetAddress": "1001 University Road",
+    "addressLocality": "Hsinchu",
+    "postalCode": "300093",
+    "addressCountry": "TW"
+  }
+}

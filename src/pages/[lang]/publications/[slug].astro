@@ -1,0 +1,122 @@
+---
+/** One paper: image or video, abstract, links, citation. Carries Google Scholar citation_* tags. */
+import Base from '../../../layouts/Base.astro';
+import PubTile from '../../../components/PubTile.astro';
+import ThesisTile from '../../../components/ThesisTile.astro';
+import { useTranslations, href, pick, langs, type Lang } from '../../../i18n/utils';
+import { publications, threadById, featured, publicationsIn, thesesForPublication } from '../../../lib/content';
+import { pubImage, authorsHtml, venueLine, videoEmbed } from '../../../lib/pubs';
+
+export async function getStaticPaths() {
+  const pubs = await publications();
+  return langs.flatMap((lang) => pubs.map((p) => ({ params: { lang, slug: p.id }, props: { pub: p } })));
+}
+
+const lang = Astro.params.lang as Lang;
+const { pub } = Astro.props;
+const t = useTranslations(lang);
+const d = pub.data;
+const thread = d.theme ? (await threadById())[d.theme] : undefined;
+const related = d.theme ? await featured(3, (await publicationsIn(d.theme)).filter((p) => p.id !== pub.id)) : [];
+const fromTheses = await thesesForPublication(pub.id);
+const img = pubImage(d);
+const embed = videoEmbed(d.video);
+const localVideo = d.video && /\.(mp4|webm)$/i.test(d.video) ? import.meta.env.BASE_URL + d.video.replace(/^\//, '') : null;
+const pdfAbs = d.pdf && /^https?:/.test(d.pdf) ? d.pdf : undefined;
+
+// Google Scholar (Highwire Press) tags
+const citation: [string, string | undefined][] = [
+  ['citation_title', d.title],
+  ...d.authors.map((a) => ['citation_author', a] as [string, string]),
+  ['citation_publication_date', d.date?.match(/^\d{4}\/\d{2}\/\d{2}/)?.[0] ?? String(d.year)],
+  [d.type === 'journal' ? 'citation_journal_title' : d.type === 'conference' ? 'citation_conference_title' : 'citation_publisher', d.type === 'conference' ? (d.venue ?? d.venueShort) : (d.venue ?? d.publisher)],
+  ['citation_volume', d.type === 'journal' ? d.volume?.replace(/\(.*\)/, '') : undefined],
+  ['citation_issue', d.type === 'journal' ? d.volume?.match(/\((.*)\)/)?.[1] : undefined],
+  ['citation_firstpage', d.pages?.split(/[–-]/)[0]],
+  ['citation_lastpage', d.pages?.split(/[–-]/)[1]],
+  ['citation_doi', d.doi],
+  ['citation_isbn', d.isbn],
+  ['citation_pdf_url', pdfAbs],
+  ['citation_abstract_html_url', d.url],
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': d.type === 'book' ? 'Book' : 'ScholarlyArticle',
+  headline: d.title,
+  author: d.authors.map((name) => ({ '@type': 'Person', name })),
+  datePublished: String(d.year),
+  isPartOf: d.venue ? { '@type': 'Periodical', name: d.venue } : undefined,
+  sameAs: d.doiUrl,
+  url: d.url,
+  abstract: d.abstract,
+};
+---
+
+<Base lang={lang} title={d.title} description={d.abstract?.slice(0, 160)} image={img ?? undefined}>
+  <Fragment slot="head">
+    {citation.filter(([, v]) => v).map(([name, content]) => <meta name={name} content={content} />)}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <article>
+    <header class="page-head paper-head">
+      <p class="crumbs">
+        <a href={href(lang, 'publications/')}>{t('pubs.title')}</a>
+        {thread && <> / <a href={href(lang, `research/${d.theme}/`)}><span class="mark" style={`--mk:${thread.color}`}></span>{pick(thread, 'name', lang)}</a></>}
+      </p>
+      <h1 class="paper-title">{d.title}</h1>
+      <p class="paper-authors" set:html={authorsHtml(d.authors)} />
+      <p class="paper-meta">{t(`pubs.type.${d.type}` as any)} · {venueLine(d)}{d.pages && `, ${d.pages}`}{d.date && ` · ${d.date}`}</p>
+    </header>
+
+    {(localVideo || embed || img) && (
+      <div class="paper-media tile">
+        {localVideo ? <video src={localVideo} poster={img ?? undefined} controls playsinline preload="metadata"></video>
+          : embed ? <div class="embed"><iframe src={embed} title={d.title} loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          : <div class="img"><img src={img!} alt={d.imageAlt ?? ''} width="1200" height="900" decoding="async" /></div>}
+      </div>
+    )}
+
+    <div class="about paper-body">
+      <div>
+        {d.abstract && <><h2 class="visually-hidden">{t('pubs.abstract')}</h2><div class="prose"><p>{d.abstract}</p></div></>}
+      </div>
+      <aside>
+        <dl class="kv">
+          {d.doiUrl && <><dt>{t('pubs.doi')}</dt><dd><a href={d.doiUrl} rel="noopener">{d.doi}</a></dd></>}
+          {d.pdf && <><dt>{t('pubs.pdf')}</dt><dd><a href={d.pdf} rel="noopener">{t('pubs.pdf')}{d.openAccess && ` · ${t('pubs.openAccess')}`}</a></dd></>}
+          {d.url && <><dt>{t('pubs.page')}</dt><dd><a href={d.url} rel="noopener">{new URL(d.url).hostname.replace(/^www\./, '')}</a></dd></>}
+          {d.video && !embed && !localVideo && <><dt>{t('pubs.video')}</dt><dd><a href={d.video} rel="noopener">{d.video}</a></dd></>}
+          {d.publisher && <><dt>{t('pubs.in')}</dt><dd>{d.publisher}</dd></>}
+          {d.isbn && <><dt>ISBN</dt><dd>{d.isbn}</dd></>}
+        </dl>
+        {d.apa && (
+          <details class="cite">
+            <summary>{t('pubs.cite')}</summary>
+            <p>{d.apa}</p>
+          </details>
+        )}
+      </aside>
+    </div>
+  </article>
+
+  {fromTheses.length > 0 && (
+    <section class="block">
+      <div class="head"><h2 class="sec">{t('pubs.fromThesis')}</h2></div>
+      <div class="grid">
+        {fromTheses.map((x) => <ThesisTile thesis={x} lang={lang} color={thread?.color} />)}
+      </div>
+    </section>
+  )}
+
+  {related.length > 0 && thread && (
+    <section class="block">
+      <div class="head"><h2 class="sec">{t('pubs.more')}</h2></div>
+      <div class="grid">
+        {related.map((p) => <PubTile pub={p} lang={lang} color={thread.color} />)}
+      </div>
+      <div class="foot"><a class="more" href={href(lang, `research/${d.theme}/`)}>{t('research.viewThread')}</a></div>
+    </section>
+  )}
+</Base>

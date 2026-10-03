@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------------------------
+   Header and footer, shared by every page. The header is the home page's header,
+   unchanged except that its values are tokens and the current section is marked.
+   --------------------------------------------------------------------------- */
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 30; padding-top: env(safe-area-inset-top, 0px);
+  pointer-events: none; background: linear-gradient(var(--scrim), var(--scrim-0)); }
+.nav-inner { max-width: var(--wrap-nav); margin-inline: auto; padding: var(--sp-14) var(--sp-24); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-16) var(--sp-32); flex-wrap: wrap; }
+.nav a { pointer-events: auto; }
+.brand { display: inline-flex; align-items: center; gap: var(--sp-12); min-width: 0; }
+.brand:hover { text-decoration: none; }
+.brand svg { width: var(--brand-mark); height: var(--brand-mark); flex: none; color: var(--fg); }
+.brand-name { font-weight: var(--fw-medium); font-size: var(--fs-lede); letter-spacing: var(--track-brand); white-space: nowrap; display: block; line-height: var(--lh-brand); }
+.brand-sub { display: block; font-size: var(--fs-micro); color: var(--fg-2); margin-top: var(--sp-2); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-8) var(--sp-24); align-items: center; }
+.nav li a { font-size: var(--fs-ui); color: var(--fg-2); padding-block: 0.2em; }
+.nav li a:hover { color: var(--fg); text-decoration: none; }
+.nav li a[aria-current='page'] { color: var(--fg); }
+.nav .sw a { color: var(--fg); border: var(--rule-w) solid var(--rule); border-radius: var(--radius); padding: 0.2em 0.55em; font-size: var(--fs-meta); }
+@media (max-width: 640px) {
+  .brand-sub { display: none; }
+  .nav ul { gap: var(--sp-6) var(--sp-14); }
+  .nav li a { font-size: var(--fs-meta); }
+  .nav-inner { padding: var(--sp-12) var(--sp-16); }
+}
+
+.footer { width: min(var(--wrap), calc(100% - 2 * var(--gutter))); margin: var(--sp-120) auto 0; padding: var(--sp-24) 0 var(--sp-48); border-top: var(--rule-w) solid var(--rule);
+  display: grid; grid-template-columns: 1fr; gap: var(--sp-16) var(--sp-48); font-size: var(--fs-ui); color: var(--fg-2); }
+@media (min-width: 880px) { .footer { grid-template-columns: 7fr 5fr; } }
+.footer p { margin: 0; }
+.footer b { color: var(--fg); font-weight: var(--fw-medium); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-6) var(--sp-24); align-content: start; }
+.footer a { color: var(--fg-2); }
+.footer a:hover { color: var(--fg); }

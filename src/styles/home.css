@@ -1,0 +1,45 @@
+/* ---------------------------------------------------------------------------
+   Home page only: the WebGL layer, the drum of panels and the hero.
+   Ported verbatim from the approved prototype ("AIL Lattice Room"); values are tokens.
+
+   body.flat = no drum: no JavaScript, prefers-reduced-motion, or before the drum starts.
+   The server renders body.flat; an inline script removes it before first paint when the
+   drum will run, so visitors with JavaScript never see the flat layout.
+   --------------------------------------------------------------------------- */
+
+body.home { overflow: hidden; }
+body.home.flat { overflow: auto; }
+
+#gl { position: fixed; inset: 0; z-index: 0; background: var(--bg); }
+#gl canvas { display: block; width: 100%; height: 100%; }
+.vignette { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 45%, transparent 55%, var(--vignette) 100%); }
+.dim { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: var(--bg); opacity: 0; will-change: opacity; }
+
+/* the drum */
+.stage { position: fixed; inset: 0; z-index: 10; perspective: 1500px; perspective-origin: 50% 50%; pointer-events: none; }
+.panel { position: absolute; left: 50%; top: 50%; width: min(var(--wrap), calc(100vw - 2 * var(--sp-24))); transform: translate(-50%, -50%);
+  transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; pointer-events: none; }
+.panel a, .panel button { pointer-events: auto; }
+.panel-inner { max-height: 70dvh; overflow: hidden; }
+body.flat .stage { position: static; perspective: none; pointer-events: auto; }
+body.flat .panel { position: static; transform: none !important; opacity: 1 !important; width: auto; max-width: var(--wrap); margin: 0 auto; padding: var(--sp-24); pointer-events: auto; visibility: visible !important; }
+body.flat .panel-inner { max-height: none; }
+body.flat .spacer { height: var(--sp-80); }
+body.flat .stage::before { content: ''; display: block; height: var(--sp-80); }   /* clear the fixed header */
+
+.shadowed { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0, 0, 0, 0.9); }
+.surface { --pad: clamp(var(--sp-20), 3vw, var(--sp-40)); background: var(--surface); border: var(--rule-w) solid var(--rule); padding: var(--pad); }
+
+.display { margin: 0; font-size: var(--fs-display); font-weight: var(--fw-bold); line-height: var(--lh-display); letter-spacing: var(--track-display); font-variation-settings: var(--wdth-display); text-wrap: balance; }
+.affil { margin: var(--sp-18) 0 0; font-size: var(--fs-ui); color: var(--fg-2); }
+.tagline { margin: var(--sp-22) 0 0; font-size: var(--fs-tagline); line-height: var(--lh-tagline); max-width: 44ch; }
+.tagline em { font-style: normal; color: var(--fg); position: relative; }
+.hero-row { display: grid; grid-template-columns: 1fr; gap: var(--sp-24); align-items: end; }
+
+/* Phones and short windows: a panel can be taller than the drum allows (70dvh) and is clipped,
+   as in the prototype. "View all →" then sticks to the panel's bottom edge (through the panel's
+   padding, so nothing shows below it) over a fade of the clipped content. */
+@media (max-width: 640px), (max-height: 820px) {
+  body:not(.flat) .panel .foot { position: sticky; bottom: calc(-2px - var(--pad, 0px)); margin: 0 0 calc(-2px - var(--pad, 0px)); padding: var(--sp-18) 0 calc(var(--pad, 0px) + 2px); background: linear-gradient(to bottom, var(--scrim-0), var(--bg) var(--sp-18)); }
+}

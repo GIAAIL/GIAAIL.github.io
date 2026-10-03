@@ -1,0 +1,24 @@
+---
+// Root → default locale. Astro's i18n redirect covers SSR; this page makes the
+// static build emit a /index.html that forwards to /en/ on GitHub Pages.
+import { href } from '../i18n/utils';
+const target = href('en', '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Architectural Informatics Lab</title>
+    <script is:inline define:vars={{ target }}>
+      // prefer the visitor's language on first visit
+      const zh = /^zh/i.test(navigator.language || '');
+      location.replace(zh ? target.replace(/\/en\/$/, '/zh/') : target);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={target}>{target}</a></p>
+  </body>
+</html>

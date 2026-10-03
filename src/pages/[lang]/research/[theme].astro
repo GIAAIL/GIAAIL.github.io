@@ -1,0 +1,73 @@
+---
+/** One research thread: description, projects, then every paper in the thread (newest first). */
+import { getEntries } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import PubTile from '../../../components/PubTile.astro';
+import ThesisTile from '../../../components/ThesisTile.astro';
+import { useTranslations, href, pick, langs, type Lang } from '../../../i18n/utils';
+import { threads, publicationsIn, projectsIn, publicationsBySlug, thesesIn } from '../../../lib/content';
+import { imageIfExists } from '../../../lib/assets';
+
+export async function getStaticPaths() {
+  const list = await threads();
+  return langs.flatMap((lang) => list.map((th) => ({ params: { lang, theme: th.id }, props: { th } })));
+}
+
+const lang = Astro.params.lang as Lang;
+const { th } = Astro.props;
+const t = useTranslations(lang);
+const d = th.data;
+const pubs = await publicationsIn(th.id);
+const theses = await thesesIn(th.id);
+const projects = await Promise.all((await projectsIn(th.id)).map(async (pr) => ({
+  pr,
+  people: (await getEntries(pr.data.people)).filter(Boolean).map((p) => (lang === 'zh' && p.data.name_zh ? p.data.name_zh : p.data.name)),
+  related: await publicationsBySlug(pr.data.publications),
+  img: imageIfExists(pr.data.image),
+})));
+---
+
+<Base lang={lang} title={pick(d, 'name', lang)} description={pick(d, 'summary', lang)}>
+  <PageHeader title={pick(d, 'name', lang)!} lede={pick(d, 'description', lang)} crumb={{ href: href(lang, 'research/'), label: t('research.title') }}>
+    <span slot="before" class="mark" style={`--mk:${d.color}`}></span>
+  </PageHeader>
+
+  {projects.length > 0 && (
+    <section class="block">
+      <div class="head"><h2 class="sec">{t('research.projects')}</h2></div>
+      <ul class="acts wide">
+        {projects.map(({ pr, people, related, img }) => (
+          <li>
+            <div>
+              {pr.data.years && <div class="k">{pr.data.years}</div>}
+              <div class="t">{pr.data.link ? <a href={pr.data.link} rel="noopener">{pick(pr.data, 'title', lang)}</a> : pick(pr.data, 'title', lang)}</div>
+              {people.length > 0 && <div class="m">{people.join(', ')}</div>}
+            </div>
+            <div>
+              {img && <div class="tile"><div class="img"><img src={img} alt="" width="1200" height="900" loading="lazy" decoding="async" /></div></div>}
+              <div class="body"><p>{pick(pr.data, 'summary', lang)}</p></div>
+              {related.length > 0 && <div class="rel">{related.map((p) => <a href={href(lang, `publications/${p.id}/`)}>{p.data.title}</a>)}</div>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="block">
+    <div class="head"><h2 class="sec">{t('research.publications')}</h2></div>
+    <div class="grid">
+      {pubs.map((p, i) => <PubTile pub={p} lang={lang} color={d.color} eager={i < 4} />)}
+    </div>
+  </section>
+
+  {theses.length > 0 && (
+    <section class="block">
+      <div class="head"><h2 class="sec">{t('research.theses')}</h2></div>
+      <div class="grid">
+        {theses.map((x) => <ThesisTile thesis={x} lang={lang} color={d.color} />)}
+      </div>
+    </section>
+  )}
+</Base>

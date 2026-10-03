@@ -1,0 +1,112 @@
+---
+/**
+ * Home: the approved "AIL Lattice Room" page. Markup and styles are the prototype's;
+ * every item now comes from src/lib/content.ts, and each preview ends in "View all →".
+ * Panels: Intro · Research · Publications · People · Activities · About (one camera view each).
+ */
+import '../../styles/home.css';
+import Base from '../../layouts/Base.astro';
+import ThreadRows from '../../components/ThreadRows.astro';
+import PubItem from '../../components/PubItem.astro';
+import PersonItem from '../../components/PersonItem.astro';
+import ActivityItem from '../../components/ActivityItem.astro';
+import Contact from '../../components/Contact.astro';
+import ViewAll from '../../components/ViewAll.astro';
+import { useTranslations, href, langPaths, type Lang } from '../../i18n/utils';
+import { threads, countsByThread, previewPublications, director, previewMembers, previewActivities, aboutPage } from '../../lib/content';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+
+const threadList = await threads();
+const counts = await countsByThread();
+const pubs = await previewPublications();
+const head = await director();
+const members = await previewMembers();
+const acts = await previewActivities();
+const about = await aboutPage(lang);
+const viewAll = t('common.viewAll');
+---
+
+<Base lang={lang} variant="home">
+  <Fragment slot="behind">
+    <div id="gl"><canvas id="house"></canvas></div>
+    <div class="vignette"></div>
+    <div class="dim" id="dim"></div>
+  </Fragment>
+
+  <main class="stage" id="main">
+
+    <section class="panel" data-i="0" aria-label={t('home.intro')}>
+      <div class="panel-inner shadowed hero-row">
+        <div>
+          <h1 class="display">{t('site.name.1')}<br />{t('site.name.2')}</h1>
+          <p class="affil">{t('site.affiliation')}</p>
+          <p class="tagline">{t('site.tagline.1')}<br />{t('site.tagline.2')}<br />{t('site.tagline.3')}<br />{t('site.tagline.4')}</p>
+        </div>
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+    <section class="panel" data-i="1" aria-label={t('home.research')}>
+      <div class="panel-inner surface">
+        <div class="head"><h2 class="sec">{t('home.research')}</h2></div>
+        <ThreadRows threads={threadList} counts={counts} lang={lang} />
+        <ViewAll href={href(lang, 'research/')} label={viewAll} />
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+    <section class="panel" data-i="2" aria-label={t('home.publications')}>
+      <div class="panel-inner surface">
+        <div class="head"><h2 class="sec">{t('home.publications')}</h2></div>
+        <ul class="acts">
+          {pubs.map((p) => <PubItem pub={p} lang={lang} />)}
+        </ul>
+        <ViewAll href={href(lang, 'publications/')} label={viewAll} />
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+    <section class="panel" data-i="3" aria-label={t('home.people')}>
+      <div class="panel-inner surface">
+        <div class="head"><h2 class="sec">{t('home.people')}</h2></div>
+        <ul class="acts">
+          {head && <PersonItem person={head} lang={lang} label={t('people.director')} />}
+          {members.map((m) => <PersonItem person={m} lang={lang} />)}
+        </ul>
+        <ViewAll href={href(lang, 'people/')} label={viewAll} />
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+    <section class="panel" data-i="4" aria-label={t('nav.activities')}>
+      <div class="panel-inner surface">
+        <div class="head"><h2 class="sec">{t('home.activities')}</h2></div>
+        <ul class="acts">
+          {acts.map((a) => <ActivityItem activity={a} lang={lang} />)}
+        </ul>
+        <ViewAll href={href(lang, 'activities/')} label={viewAll} />
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+    <section class="panel" data-i="5" aria-label={t('home.about')}>
+      <div class="panel-inner surface about">
+        <div>
+          <h2 class="sec">{t('home.about')}</h2>
+          {about.data.excerpt.map((para) => <p>{para}</p>)}
+          <ViewAll href={href(lang, 'about/')} label={viewAll} />
+        </div>
+        <Contact lang={lang} />
+      </div>
+    </section>
+    <div class="spacer"></div>
+
+  </main>
+</Base>
+
+<script>
+  import '../../scripts/home/main.js';
+</script>

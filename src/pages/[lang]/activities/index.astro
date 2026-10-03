@@ -1,0 +1,50 @@
+---
+/** Activities: grouped by year (newest first); filter by type and search text. */
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import ActivityItem from '../../../components/ActivityItem.astro';
+import { useTranslations, langPaths, type Lang } from '../../../i18n/utils';
+import { activities, activityYear, ACTIVITY_TYPES } from '../../../lib/content';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+
+const list = await activities();
+const years = [...new Set(list.map(activityYear))];
+const types = ACTIVITY_TYPES.filter((ty) => list.some((a) => a.data.type === ty));
+---
+
+<Base lang={lang} title={t('activities.title')}>
+  <PageHeader title={t('activities.title')} />
+
+  <form class="filters" data-filter role="search" aria-label={t('activities.title')}>
+    <div class="field">
+      <label for="f-type">{t('activities.filter.type')}</label>
+      <select id="f-type" name="type">
+        <option value="">{t('activities.filter.all')}</option>
+        {types.map((ty) => <option value={ty}>{t(`activities.type.${ty}` as any)}</option>)}
+      </select>
+    </div>
+    <div class="field grow">
+      <label for="f-q">{t('activities.filter.search')}</label>
+      <input id="f-q" name="q" type="search" autocomplete="off" />
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-filter-count data-label={t('pubs.results')}></p>
+  </form>
+
+  {years.map((y) => (
+    <section class="group" data-filter-group>
+      <h2 class="year">{y}</h2>
+      <ul class="acts wide">
+        {list.filter((a) => activityYear(a) === y).map((a) => <ActivityItem activity={a} lang={lang} full />)}
+      </ul>
+    </section>
+  ))}
+  <p class="empty" hidden data-filter-empty>{t('activities.empty')}</p>
+</Base>
+
+<script>
+  import { initFilter } from '../../../scripts/filter.js';
+  initFilter();
+</script>

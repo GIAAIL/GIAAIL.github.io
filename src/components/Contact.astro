@@ -1,0 +1,18 @@
+---
+/** Director, email, address, join link: the home About panel and the About page. */
+import site from '../data/site.json';
+import { director } from '../lib/content';
+import { href, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const head = await director();
+const name = head ? (lang === 'zh' && head.data.name_zh ? head.data.name_zh : head.data.name) : undefined;
+---
+<div class="contact">
+  {name && <p><b>{t('about.director')}</b><br />{name}</p>}
+  <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+  <p>{site.address[lang][0]}<br />{site.address[lang][1]}</p>
+  <p><a href={href(lang, 'about/') + '#join'}>{t('about.join')}</a></p>
+</div>

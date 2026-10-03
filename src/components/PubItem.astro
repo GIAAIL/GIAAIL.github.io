@@ -1,0 +1,11 @@
+---
+/** Text-only publication item for the home Publications panel: venue and year, title (→ paper page), authors. */
+import type { Pub } from '../lib/content';
+import { href, type Lang } from '../i18n/utils';
+import { venueKicker, authorsHtml } from '../lib/pubs';
+
+interface Props { pub: Pub; lang: Lang }
+const { pub, lang } = Astro.props;
+const d = pub.data;
+---
+<li><div class="k">{venueKicker(d)}</div><div class="t"><a href={href(lang, `publications/${pub.id}/`)}>{d.title}</a></div><div class="m"><Fragment set:html={authorsHtml(d.authors)} /></div></li>

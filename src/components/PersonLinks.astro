@@ -1,0 +1,17 @@
+---
+/** A person's email and external links, labelled in the page language. */
+import type { Person } from '../lib/content';
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props { person: Person; lang: Lang }
+const { person, lang } = Astro.props;
+const t = useTranslations(lang);
+const d = person.data;
+const links = Object.entries(d.links).filter(([, v]) => v) as [string, string][];
+---
+{(links.length > 0 || d.email) && (
+  <div class="links m">
+    {d.email && <a href={`mailto:${d.email}`}>{t('people.email')}</a>}
+    {links.map(([k, v]) => <a href={v} rel="noopener">{t(`people.${k}` as any)}</a>)}
+  </div>
+)}

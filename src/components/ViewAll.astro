@@ -1,0 +1,6 @@
+---
+/** "View all →" — closes every home preview; links to the section's page. */
+interface Props { href: string; label: string }
+const { href, label } = Astro.props;
+---
+<div class="foot"><a class="more" href={href}>{label}</a></div>

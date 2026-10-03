@@ -1,0 +1,117 @@
+---
+/**
+ * One thesis: main figure, titles, author (→ People), degree, abstract, keywords, the library
+ * record, the other representative figures, and the papers that came out of it.
+ * Data: data/people.xlsx (sheets theses, thesis_figures). PDFs are never linked.
+ */
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PubTile from '../../../components/PubTile.astro';
+import { useTranslations, href, pick, langs, type Lang } from '../../../i18n/utils';
+import { threadById, publicationsBySlug } from '../../../lib/content';
+import { displayName, degreeLine, thesisTitle, thesisHref, thesisAbstract, figureUrl } from '../../../lib/people';
+
+export async function getStaticPaths() {
+  const all = await getCollection('theses');
+  return langs.flatMap((lang) => all.map((x) => ({ params: { lang, id: x.id }, props: { thesis: x } })));
+}
+
+const lang = Astro.params.lang as Lang;
+const { thesis } = Astro.props;
+const t = useTranslations(lang);
+const d = thesis.data;
+
+const person = await getEntry(d.person);
+const thread = d.thread ? (await threadById())[d.thread.id] : undefined;
+const related = await publicationsBySlug(d.pubs);
+const title = thesisTitle(d, lang);
+const otherTitle = lang === 'zh' ? (d.title !== d.title_zh ? d.title : '') : d.title_zh && d.title_zh !== d.title ? d.title_zh : '';
+const abstract = thesisAbstract(d, lang);
+const abstractLang = lang === 'en' && !d.abstract && d.abstract_zh ? 'zh-Hant' : undefined;
+const keywords = lang === 'zh' && d.keywords_zh.length ? d.keywords_zh : d.keywords.length ? d.keywords : d.keywords_zh;
+const record = thesisHref(d);
+const main = d.figures.find((f) => f.main) ?? d.figures[0];
+const gallery = d.figures.filter((f) => f !== main);
+const caption = (f: (typeof d.figures)[number]) => (lang === 'zh' ? f.caption_zh || f.caption : f.caption || f.caption_zh) || '';
+const dept = lang === 'zh' ? d.department_zh : d.department;
+const author = person ? displayName(person.data, lang) : '';
+const authorHref = person?.data.publish ? `${href(lang, 'people/')}#${person.id}` : undefined;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Thesis',
+  name: d.title,
+  alternateName: d.title_zh,
+  author: person ? { '@type': 'Person', name: person.data.name } : undefined,
+  datePublished: String(d.year),
+  inSupportOf: d.degree === 'PhD' ? 'Doctor of Philosophy' : 'Master of Science in Architecture',
+  sourceOrganization: d.university === 'NYCU' ? 'National Yang Ming Chiao Tung University' : 'National Chiao Tung University',
+  keywords: d.keywords.join(', ') || undefined,
+  abstract: d.abstract || undefined,
+  sameAs: record,
+};
+---
+
+<Base lang={lang} title={title} description={abstract?.slice(0, 160)} image={main ? figureUrl(main.src) : undefined}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article>
+    <header class="page-head paper-head">
+      <p class="crumbs">
+        <a href={`${href(lang, 'people/')}#alumni`}>{t('people.alumni')}</a>
+        {thread && <> / <a href={href(lang, `research/${d.thread!.id}/`)}><span class="mark" style={`--mk:${thread.color}`}></span>{pick(thread, 'name', lang)}</a></>}
+      </p>
+      <h1 class="paper-title" lang={lang === 'en' && /[㐀-鿿]/.test(title) ? 'zh-Hant' : undefined}>{title}</h1>
+      {otherTitle && <p class="paper-authors" lang={lang === 'en' ? 'zh-Hant' : 'en'}>{otherTitle}</p>}
+      <p class="paper-authors">{authorHref ? <a href={authorHref}>{author}</a> : author}</p>
+      <p class="paper-meta">{degreeLine(d, lang)}{dept && ` · ${dept}`}</p>
+    </header>
+
+    {main && (
+      <figure class="paper-media fig">
+        <img src={figureUrl(main.src)} alt={caption(main)} width={main.w} height={main.h} decoding="async" />
+        {caption(main) && <figcaption>{caption(main)}</figcaption>}
+      </figure>
+    )}
+
+    <div class="about paper-body">
+      <div>
+        {abstract && (
+          <>
+            <h2 class="visually-hidden">{t('pubs.abstract')}</h2>
+            <div class="prose" lang={abstractLang}>{abstract.split(/\n\s*\n|\n/).filter((x) => x.trim()).map((para) => <p>{para.trim()}</p>)}</div>
+          </>
+        )}
+      </div>
+      <aside>
+        <dl class="kv">
+          {record && <><dt>{t('theses.record')}</dt><dd><a href={record} rel="noopener">{new URL(record).hostname.replace(/^www\./, '')}</a></dd></>}
+          <dt>{t('theses.advisor')}</dt><dd>{t('theses.advisorName')}</dd>
+          {d.coAdvisors && <><dt>{t('theses.coAdvisor')}</dt><dd>{d.coAdvisors}</dd></>}
+          {keywords.length > 0 && <><dt>{t('theses.keywords')}</dt><dd>{keywords.join(lang === 'zh' ? '、' : ', ')}</dd></>}
+          {d.link && <><dt>{t('theses.link')}</dt><dd><a href={d.link} rel="noopener">{d.link.replace(/^https?:\/\/(www\.)?/, '')}</a></dd></>}
+        </dl>
+      </aside>
+    </div>
+
+    {gallery.length > 0 && (
+      <div class="gallery">
+        {gallery.map((f) => (
+          <figure class="fig">
+            <a href={figureUrl(f.src)}><img src={figureUrl(f.srcSm)} alt={caption(f)} width={f.w} height={f.h} loading="lazy" decoding="async" /></a>
+            {caption(f) && <figcaption>{caption(f)}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    )}
+  </article>
+
+  {related.length > 0 && (
+    <section class="block">
+      <div class="head"><h2 class="sec">{t('theses.related')}</h2></div>
+      <div class="grid">
+        {related.map((p) => <PubTile pub={p} lang={lang} color={thread?.color} />)}
+      </div>
+    </section>
+  )}
+</Base>
