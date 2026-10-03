@@ -26,7 +26,9 @@
     "pdf": "https://academic.oup.com/jcde/article-pdf/13/6/1/68181509/qwag042.pdf",
     "doiUrl": "https://doi.org/10.1093/jcde/qwag042",
     "theme": "fabrication",
-    "featured": 1
+    "featured": 1,
+    "image": "/images/pubs/2026-crolla-deterministic-tau-based.jpg",
+    "imageAlt": "Single reusable wooden jig for laminating the curved glulam beams"
   },
   {
     "id": "2026-wang-building-morphology-urban",
@@ -54,7 +56,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/ecaade2026_84.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2026.1.201",
     "theme": "simulation",
-    "featured": 2
+    "featured": 2,
+    "image": "/images/pubs/2026-wang-building-morphology-urban.jpg",
+    "imageAlt": "Simulated and predicted thermal comfort fields across urban layouts"
   },
   {
     "id": "2026-hsieh-dynamic-visual-feature",
@@ -82,7 +86,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2026_234.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2026.1.581",
     "theme": "form",
-    "featured": 4
+    "featured": 4,
+    "image": "/images/pubs/2026-hsieh-dynamic-visual-feature.jpg",
+    "imageAlt": "A view in a classical Chinese garden used in the study"
   },
   {
     "id": "2026-lu-modular-neural-cellular",
@@ -110,7 +116,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2026_232.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2026.1.031",
     "theme": "simulation",
-    "featured": 5
+    "featured": 5,
+    "image": "/images/pubs/2026-lu-modular-neural-cellular.jpg",
+    "imageAlt": "Evolution Error"
   },
   {
     "id": "2026-lu-simulation-follows-action",
@@ -138,7 +146,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/ecaade2026_147.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2026.1.241",
     "theme": "simulation",
-    "featured": 3
+    "featured": 3,
+    "image": "/images/pubs/2026-lu-simulation-follows-action.jpg",
+    "imageAlt": "Grasshopper on the left, the Taichi"
   },
   {
     "id": "2025-chang-aurelis-wearable-device",
@@ -165,7 +175,9 @@
     "url": "https://link.springer.com/chapter/10.1007/978-3-031-93061-4_1",
     "doiUrl": "https://doi.org/10.1007/978-3-031-93061-4_1",
     "theme": "sentient",
-    "featured": 6
+    "featured": 6,
+    "image": "/images/pubs/2025-chang-aurelis-wearable-device.jpg",
+    "imageAlt": "Aurélis worn on a mannequin, lit from within"
   },
   {
     "id": "2025-lu-computational-modeling-controlled",
@@ -192,7 +204,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2025_173",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2025_173.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2025.2.429",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2025-lu-computational-modeling-controlled.jpg",
+    "imageAlt": ", using the column as an example, illustrates the interlocking behavior of various particles in LAS and RAS. Due to the uniform cross-sectional area of the column, it serves as an objective basis for "
   },
   {
     "id": "2025-lee-generative-tonal-art",
@@ -219,7 +233,9 @@
     "url": "https://dl.acm.org/doi/10.1145/3757374.3771537",
     "pdf": "https://dl.acm.org/doi/pdf/10.1145/3757374.3771537",
     "doiUrl": "https://doi.org/10.1145/3757374.3771537",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2025-lee-generative-tonal-art.jpg",
+    "imageAlt": "Generative tonal art rendering, Night Lights style"
   },
   {
     "id": "2025-lu-neural-cellular-automata",
@@ -246,7 +262,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2025_858",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2025_858.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2025.3.325",
-    "theme": "simulation"
+    "theme": "simulation",
+    "image": "/images/pubs/2025-lu-neural-cellular-automata.jpg",
+    "imageAlt": "Comparison of layout types of prediction"
   },
   {
     "id": "2025-wang-shaded-walking-path",
@@ -273,7 +291,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2025_460",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2025_460.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2025.4.049",
-    "theme": "simulation"
+    "theme": "simulation",
+    "image": "/images/pubs/2025-wang-shaded-walking-path.jpg",
+    "imageAlt": "Thermal Comfort Visualization"
   },
   {
     "id": "2025-zhong-spatial-expression-technology",
@@ -301,7 +321,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/sigradi2025_146.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.sigradi.2025.1.1655",
     "theme": "xr",
-    "featured": 9
+    "featured": 9,
+    "image": "/images/pubs/2025-zhong-spatial-expression-technology.jpg",
+    "imageAlt": "maps the field along three orthogonal axes—Representation (fragmented 2D → integrated XR overlays), Cognitive Load (high → low), and Interaction/Presence (passive → active). Prior work clusters in fra"
   },
   {
     "id": "2024-hsieh-biomimetic-robotic-system",
@@ -330,7 +352,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2024_76.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2024.3.131",
     "theme": "fabrication",
-    "featured": 7
+    "featured": 7,
+    "image": "/images/pubs/2024-hsieh-biomimetic-robotic-system.jpg",
+    "imageAlt": "Mechanical Design Detail of The Tensegrity-Based Biomimetic Robotic System"
   },
   {
     "id": "2024-hsieh-multimedia-framework-continuum",
@@ -357,7 +381,9 @@
     "url": "https://ieeexplore.ieee.org/document/10868720",
     "pdf": "https://arxiv.org/pdf/2409.14708",
     "doiUrl": "https://doi.org/10.1109/ispacs62486.2024.10868720",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-multimedia-framework-continuum.jpg",
+    "imageAlt": "Detail of the enhanced version"
   },
   {
     "id": "2024-chen-pneumatic-system-design",
@@ -385,7 +411,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2024_210",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2024_210.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2024.3.371",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2024-chen-pneumatic-system-design.jpg",
+    "imageAlt": "(a) Case 3 of interactive pneumatic design. (b) Close-up photo of airbag inflating. (c)"
   },
   {
     "id": "2024-shiung-sentient-space-light",
@@ -412,7 +440,9 @@
     "url": "https://dl.acm.org/doi/10.1145/3681756.3697898",
     "pdf": "https://dl.acm.org/doi/pdf/10.1145/3681756.3697898",
     "doiUrl": "https://doi.org/10.1145/3681756.3697898",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2024-shiung-sentient-space-light.jpg",
+    "imageAlt": "Sensor and light modules of the sentient space"
   },
   {
     "id": "2024-hsieh-comparative-evaluation-learning",
@@ -439,7 +469,9 @@
     "url": "https://ieeexplore.ieee.org/document/10868337",
     "pdf": "https://arxiv.org/pdf/2407.02428",
     "doiUrl": "https://doi.org/10.1109/ispacs62486.2024.10868337",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-comparative-evaluation-learning.jpg",
+    "imageAlt": "View of the tendon-driven continuum robot"
   },
   {
     "id": "2024-wong-curved-glulam-architecture",
@@ -470,7 +502,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2024_31",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2024_31.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2024.3.181",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-wong-curved-glulam-architecture.jpg",
+    "imageAlt": "KATENARA (Dongshi, Taiwan, 2023)"
   },
   {
     "id": "2024-hsieh-discrete-interlocking-formwork",
@@ -497,7 +531,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/ecaade2024_87",
     "pdf": "https://papers.cumincad.org/data/works/att/ecaade2024_87.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2024.1.333",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-discrete-interlocking-formwork.jpg",
+    "imageAlt": "Grafting interlocking"
   },
   {
     "id": "2024-hsieh-low-tech-bamboo",
@@ -524,7 +560,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/ecaade2024_115",
     "pdf": "https://papers.cumincad.org/data/works/att/ecaade2024_115.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2024.1.393",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-low-tech-bamboo.jpg",
+    "imageAlt": "Hierarchy of the structure"
   },
   {
     "id": "2024-lee-point-based-stylization",
@@ -551,7 +589,9 @@
     "abstract": "Inspired by real-world point-based art forms such as Impressionism, embroidery, and pebble mosaics, we have discovered the creative potential of arranging points with distinct appearances within a unified form of expression. We propose an approach that facilitates the creation of non-uniform, art-directed representations for point-based geometry, allowing for interactive rendering in 3D space. Rather than replacing all points with a set of static image textures as input, a dynamic representation of points must be designed in a controllable way that enhances visual richness and creative freedom to the artist. We met this challenge by defining each point as multi-dimensional spatial data and replacing it with parameterized textured proxy geometry, resulting in varied painterly strokes. Notably, the textured proxy geometry remains interactive, empowering artists to dynamically modify the strokes after placement. To aid the creative process, we introduce a sketch-based authoring tool that allows artists to compose various styles by sketching a few curves in 3D space. We provide examples generated by our prototype in an oil pastel painting style to demonstrate its ability to create non-uniform stylizations for point-based geometry.",
     "url": "https://link.springer.com/chapter/10.1007/978-3-031-55312-7_2",
     "doiUrl": "https://doi.org/10.1007/978-3-031-55312-7_2",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2024-lee-point-based-stylization.jpg",
+    "imageAlt": "Point-based stylization of a 3D model"
   },
   {
     "id": "2024-hsieh-adaptive-stiffness-biomimetic",
@@ -568,7 +608,9 @@
     "url": "https://arxiv.org/abs/2407.05053",
     "abstract": "Biomimicry has played a pivotal role in robotics. In contrast to rigid robots, bio-inspired robots exhibit an inherent compliance, facilitating versatile movements and operations in constrained spaces. The robot implementation in fabrication, however, has posed technical challenges and mechanical complexity, thereby underscoring a noticeable gap between research and practice. To address the limitation, the research draws inspiration from the unique musculoskeletal feature of vertebrate physiology, which displays significant capabilities for sophisticated locomotion. The research converts the biological paradigm into a tensegrity-based robotic system, which is formed by the design of rigid-flex coupling and a compliant mechanism. This integrated technique enables the robot to achieve a wide range of motions with variable stiffness and adaptability, holding great potential for advanced performance in ill-defined environments. In summation, the research aims to provide a robust foundation for tensegrity-based biomimetic robots in practice, enhancing the feasibility of undertaking intricate robotic constructions.",
     "pdf": "https://arxiv.org/pdf/2407.05053",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-adaptive-stiffness-biomimetic.jpg",
+    "imageAlt": "Left: Rigid-Flex coupling. Right: Rhombic configuration transformations"
   },
   {
     "id": "2024-hsieh-visualization-optimization-continuum",
@@ -585,7 +627,9 @@
     "url": "https://arxiv.org/abs/2410.14305",
     "abstract": "Continuum robots, known for their high flexibility and adaptability, offer immense potential for applications such as medical surgery, confined-space inspections, and wearable devices. However, their non-linear elastic nature and complex kinematics present significant challenges in digital modeling and visualization. Identifying the modal shape coefficients of specific robot configuration often requires plenty of physical experiments, which is time-consuming and robot-specific. To address this issue, this research proposes a computational framework that utilizes evolutionary algorithm (EA) to simplify the coefficient identification process. Our method starts by generating datasets using Lie group kinematics and physics-based simulations, defining both ideal configurations and models to be optimized. With the deployment of EA solver, the deviations were iteratively minimized through two fitness objectives —mean square error of shape deviation (MSE1 ) and tool center point (TCP) vector deviation (MSE2 ) —to align the robot’s backbone curve with the desired configuration. Built on the Computer-Aided Design (CAD) platform Grasshopper, this framework provides real-time visualization suitable for development of continuum robots. Results show that this integrated method achieves precise alignment and effective identification. Overall, the objective of this research aims to reduce the modeling complexity of continuum robots, enabling precise, efficient virtual simulation before robot programming and implementation.",
     "pdf": "https://arxiv.org/pdf/2410.14305",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2024-hsieh-visualization-optimization-continuum.jpg",
+    "imageAlt": "Modal shape derived from individual generation"
   },
   {
     "id": "2023-lin-design-bistable-deployable",
@@ -613,7 +657,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2023_304",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2023_304.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2023.2.541",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2023-lin-design-bistable-deployable.jpg",
+    "imageAlt": "(a) Assembly logic of a single module. (b) Assembly logic of multiple modules"
   },
   {
     "id": "2023-shiung-searchlight-space-sentient",
@@ -642,7 +688,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2023_45.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2023.1.433",
     "theme": "sentient",
-    "featured": 8
+    "featured": 8,
+    "image": "/images/pubs/2023-shiung-searchlight-space-sentient.jpg",
+    "imageAlt": "system diagram for the Searchlight space"
   },
   {
     "id": "2022-lo-natural-human-drone",
@@ -670,7 +718,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2022_322",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2022_322.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2022.1.099",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2022-lo-natural-human-drone.jpg",
+    "imageAlt": "(a) Linear movement (b) Circular movement"
   },
   {
     "id": "2022-tang-designing-framework-metaverse",
@@ -697,7 +747,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2022_493",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2022_493.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2022.2.445",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2022-tang-designing-framework-metaverse.jpg",
+    "imageAlt": "A preliminary metaverse architecture framework"
   },
   {
     "id": "2022-lin-exploring-topological-system",
@@ -725,7 +777,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2022_32",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2022_32.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2022.1.667",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2022-lin-exploring-topological-system.jpg",
+    "imageAlt": "Feature classification of different types of Dougong"
   },
   {
     "id": "2021-hou-reconstructing-photogrammetric-3d",
@@ -751,7 +805,9 @@
     "abstract": "In this paper, we propose a deep learning-based method to reconstruct 3D models generated with photogrammetry techniques. The mechanism to reconstruct the model is detecting corners and then segment the polyline contours based on the detected corners. Moreover, we take advantage of the generative design tool (Grasshopper) to build a training gym system, constantly producing unique datasets to train the neural network. In the part of feature engineering, we use series of external angles as the geometrical feature to train the model, which means that the model processes a small number array instead of using images or any kind of huge multi-dimensional data. The result of this research reveals that the neural network model trained by our training gym system can learn how to detect corners on building contours successfully. The details of the training gym, dataset format, dataset generator, the deep learning model, and the potential usages will be elaborated in the following content.",
     "url": "https://link.springer.com/chapter/10.1007/978-3-030-57509-0_27",
     "doiUrl": "https://doi.org/10.1007/978-3-030-57509-0_27",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2021-hou-reconstructing-photogrammetric-3d.jpg",
+    "imageAlt": "Building models reconstructed from photogrammetric meshes"
   },
   {
     "id": "2020-tu-after-abstraction-before",
@@ -779,7 +835,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2020_099",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2020_099.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2020.2.517",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2020-tu-after-abstraction-before.jpg",
+    "imageAlt": "Spatial relation diagram and projection results"
   },
   {
     "id": "2020-tseng-representation-sound-3d",
@@ -807,7 +865,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2020_398",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2020_398.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2020.1.609",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2020-tseng-representation-sound-3d.jpg",
+    "imageAlt": "The Solid Model of Sound Frequency"
   },
   {
     "id": "2020-yang-micro-motion-ambient",
@@ -834,7 +894,9 @@
     "url": "https://papers.iafor.org/submission57071",
     "pdf": "https://papers.iafor.org/wp-content/uploads/papers/acah2020/ACAH2020_57071.pdf",
     "doiUrl": "https://doi.org/10.22492/issn.2186-229x.2020.14",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2020-yang-micro-motion-ambient.jpg",
+    "imageAlt": "Dappled light moving across a wall"
   },
   {
     "id": "2019-cheng-highly-integrated-horizontal",
@@ -862,7 +924,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/ecaadesigradi2019_350",
     "pdf": "https://papers.cumincad.org/data/works/att/ecaadesigradi2019_350.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2019.3.305",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2019-cheng-highly-integrated-horizontal.jpg",
+    "imageAlt": "Terrain and city models generated with the tool"
   },
   {
     "id": "2019-cheng-method-mesh-simplification",
@@ -889,7 +953,9 @@
     "abstract": "This paper proposes a method of mesh simplification for 3D terrain or city models generated photogrammetrically from drone captured images, enabled by the ability of extracting the architectural features. Compare to traditional geometric computational method, the proposed method recognizes and processes the features from the architectural perspectives. In addition, the workflow also allows exporting the simplified models and geometric features to open platforms, e.g. OpenStreetMap, for practical usages in site analysis, city generation, and contributing to the open data communities.",
     "url": "https://link.springer.com/chapter/10.1007/978-981-13-8410-3_12",
     "doiUrl": "https://doi.org/10.1007/978-981-13-8410-3_12",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2019-cheng-method-mesh-simplification.jpg",
+    "imageAlt": "Drone photogrammetry model of a campus"
   },
   {
     "id": "2019-tang-mirror-that-reflects",
@@ -917,7 +983,9 @@
     "url": "https://link.springer.com/chapter/10.1007/978-3-030-21935-2_5",
     "pdf": "https://link.springer.com/content/pdf/10.1007/978-3-030-21935-2_5.pdf",
     "doiUrl": "https://doi.org/10.1007/978-3-030-21935-2_5",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2019-tang-mirror-that-reflects.jpg",
+    "imageAlt": "Interacting with Erised in the kitchen setting"
   },
   {
     "id": "2019-hu-pneu-multi-tools",
@@ -946,7 +1014,9 @@
     "pdf": "https://dl.acm.org/doi/pdf/10.1145/3332167.3357107",
     "doiUrl": "https://doi.org/10.1145/3332167.3357107",
     "theme": "sentient",
-    "featured": 11
+    "featured": 11,
+    "image": "/images/pubs/2019-hu-pneu-multi-tools.jpg",
+    "imageAlt": "Virtual grasps beside the hand-worn pneumatic device that renders them"
   },
   {
     "id": "2019-cheng-robotic-glass-crafting",
@@ -975,7 +1045,9 @@
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2019_447.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2019.1.193",
     "theme": "fabrication",
-    "featured": 10
+    "featured": 10,
+    "image": "/images/pubs/2019-cheng-robotic-glass-crafting.jpg",
+    "imageAlt": "The tool on robotic arm"
   },
   {
     "id": "2018-chien-approach-open-source",
@@ -999,7 +1071,9 @@
     "url": "https://tafpublications.com/platform/Articles/full-jater4.1.3.php",
     "pdf": "http://www.tafpublications.com/gip_content/paper/Jater-4.1.3.pdf",
     "doiUrl": "https://doi.org/10.20474/jater-4.1.3",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2018-chien-approach-open-source.jpg",
+    "imageAlt": "Collaborative construction model in traditional set-"
   },
   {
     "id": "2018-chung-mapping-indeterminacy-chance",
@@ -1022,7 +1096,9 @@
     "abstract": "A dance notation system is usually regarded as a representation tool rather than a creative tool. This paper uses the indeterminacy approach as a creativity method to assist body-based limb exercise and development. The movement notation system is constructed based on the effort action from Laban Movement Analysis. In-depth interviews provide a comprehensive insight into the choreographer’s perspective. The findings show that the notation system and body-based improvisation training are not mutually exclusive. Therefore, the use of a notation system gives dancers a better understanding of how movements interact with various stimuli, in relation to internal and external environments.",
     "url": "https://direct.mit.edu/leon/article/51/03/282-283/46506",
     "doiUrl": "https://doi.org/10.1162/leon_a_01570",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2018-chung-mapping-indeterminacy-chance.jpg",
+    "imageAlt": "Notation symbols for spatial movement"
   },
   {
     "id": "2018-chien-practice-design-build",
@@ -1046,7 +1122,9 @@
     "url": "https://tafpublications.com/platform/Articles/full-jahss4.5.4.php",
     "pdf": "http://www.tafpublications.com/gip_content/paper/Jahss-4.5.4.pdf",
     "doiUrl": "https://doi.org/10.20474/jahss-4.5.4",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2018-chien-practice-design-build.jpg",
+    "imageAlt": "Participants at work in a design-build programme"
   },
   {
     "id": "2018-wang-analysis-applications-theo",
@@ -1074,7 +1152,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2018_140",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2018_140.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2018.2.359",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2018-wang-analysis-applications-theo.jpg",
+    "imageAlt": "Rotation Type digital simulation and different moving modules"
   },
   {
     "id": "2016-wu-spark-wall-control",
@@ -1098,7 +1178,9 @@
     "url": "https://journals.sagepub.com/doi/10.1177/1478077116663347",
     "pdf": "https://journals.sagepub.com/doi/pdf/10.1177/1478077116663347",
     "doiUrl": "https://doi.org/10.1177/1478077116663347",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2016-wu-spark-wall-control.jpg",
+    "imageAlt": "Spark Wall"
   },
   {
     "id": "2016-chien-tooling-applications-collaboration",
@@ -1122,7 +1204,9 @@
     "url": "https://kkgpublications.com/applied-sciences-v2-issue3-article4/",
     "pdf": "https://kkgpublications.com/wp-content/uploads/2019/04/IJAPS.2.50004-3.pdf",
     "doiUrl": "https://doi.org/10.20469/ijaps.2.50004-3",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2016-chien-tooling-applications-collaboration.jpg",
+    "imageAlt": ". The application model of tooling in traditional settlements"
   },
   {
     "id": "2016-cheng-biomimetic-robotic-construction",
@@ -1150,7 +1234,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/ecaade2016_079",
     "pdf": "https://papers.cumincad.org/data/works/att/ecaade2016_079.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2016.1.133",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2016-cheng-biomimetic-robotic-construction.jpg",
+    "imageAlt": "This process is similar to FDM"
   },
   {
     "id": "2016-chen-design-bamboo-bend",
@@ -1178,7 +1264,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2016_125",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2016_125.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2016.125",
-    "theme": "fabrication"
+    "theme": "fabrication",
+    "image": "/images/pubs/2016-chen-design-bamboo-bend.jpg",
+    "imageAlt": "The project"
   },
   {
     "id": "2015-wu-spark-wall-control",
@@ -1206,7 +1294,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2015_122",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2015_122.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2015.075",
-    "theme": "sentient"
+    "theme": "sentient",
+    "image": "/images/pubs/2015-wu-spark-wall-control.jpg",
+    "imageAlt": "Spark wall integrates 160 servos to achieve physical pixels"
   },
   {
     "id": "2009-hou-book",
@@ -1274,7 +1364,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2006_379",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2006_379.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2006.x.c4w",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2006-wu-3d-user-interface.jpg",
+    "imageAlt": "Subjects navigate and operate in CAVE environment"
   },
   {
     "id": "2006-shih-auto-composing-virtual",
@@ -1304,7 +1396,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2006_487",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2006_487.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2006.x.s2e",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2006-shih-auto-composing-virtual.jpg",
+    "imageAlt": "The system framework Figure 2 shows the visualized result of the system. Left one shows the"
   },
   {
     "id": "2006-lim-new-media-digital",
@@ -1361,7 +1455,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/2005_459",
     "pdf": "https://papers.cumincad.org/data/works/att/2005_459.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.ecaade.2005.459",
-    "theme": "form"
+    "theme": "form",
+    "image": "/images/pubs/2005-hou-dancing-stairs-object.jpg",
+    "imageAlt": "(a) ES develops by expanding relationships; (b) ES develops by expanding DE;"
   },
   {
     "id": "2005-wu-multiple-digital-media",
@@ -1392,7 +1488,9 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/caadria2005_a_7c_b",
     "pdf": "https://papers.cumincad.org/data/works/att/caadria2005_a_7c_b.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.2005.314",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/2005-wu-multiple-digital-media.jpg",
+    "imageAlt": "Virtual studio"
   },
   {
     "id": "2004-hou-surf-tm-surface",
@@ -1453,6 +1551,8 @@
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/8a8f",
     "pdf": "https://papers.cumincad.org/data/works/att/8a8f.content.pdf",
     "doiUrl": "https://doi.org/10.52842/conf.caadria.1996.299",
-    "theme": "xr"
+    "theme": "xr",
+    "image": "/images/pubs/1996-hou-exploration-extending-communication.jpg",
+    "imageAlt": "Extending the communication range of the virtual design studio"
   }
 ]

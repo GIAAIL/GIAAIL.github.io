@@ -171,7 +171,7 @@ export const alumni = () =>
 // ---------------------------------------------------------------- activities
 
 /** Display order of activity types (filters, labels). */
-export const ACTIVITY_TYPES = ['exhibition', 'festival', 'curation', 'grant', 'conference', 'talk', 'workshop', 'jury', 'award', 'press', 'writing'] as const;
+export const ACTIVITY_TYPES = ['exhibition', 'festival', 'curation', 'conference', 'talk', 'workshop', 'jury', 'award', 'press', 'writing'] as const;
 
 /** Newest first: year, then exact date within the year, then title. */
 export const activities = () =>
@@ -188,8 +188,12 @@ export const activityYear = (a: Activity) => a.data.year;
 
 // ---------------------------------------------------------------- projects, pages
 
+/** A thread's projects: research series first (low `order`), then funded projects, newest first. Drafts stay hidden. */
 export async function projectsIn(thread: string) {
-  return (await getCollection('projects', ({ data }) => data.theme.id === thread)).sort((a, b) => a.data.order - b.data.order);
+  const start = (p: Project) => p.data.start ?? Number(p.data.years?.match(/\d{4}/)?.[0] ?? 0);
+  return (await getCollection('projects', ({ data }) => data.theme.id === thread && (SHOW_DRAFTS || !data.draft))).sort(
+    (a, b) => a.data.order - b.data.order || start(b) - start(a) || a.data.title.localeCompare(b.data.title),
+  );
 }
 
 export async function aboutPage(lang: Lang) {

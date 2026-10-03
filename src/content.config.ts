@@ -139,8 +139,8 @@ const theses = defineCollection({
 });
 
 /**
- * Activities: exhibitions, festivals, curation, funded projects, conferences, talks, workshops,
- * juries, awards, media coverage and writing. Body = English text. Written by
+ * Activities: exhibitions, festivals, curation, conferences, talks, workshops, juries, awards,
+ * media coverage and writing. (Funded research projects are Projects, under Research.) Body = English text. Written by
  * scripts/make_activities.py until the lab starts editing the files by hand.
  */
 const activities = defineCollection({
@@ -150,7 +150,7 @@ const activities = defineCollection({
     title_zh: z.string().optional(),
     type: z.enum([
       'exhibition', 'festival', 'curation', 'conference', 'talk', 'workshop',
-      'jury', 'award', 'grant', 'press', 'writing',
+      'jury', 'award', 'press', 'writing',
     ]),
     year: z.number().int(),
     date: z.string().optional(),            // ISO start date, sort key within a year: "2026-06-11"
@@ -177,21 +177,28 @@ const activities = defineCollection({
   }),
 });
 
-/** Projects: multi-paper umbrellas (a funded project, a research series). */
+/** Projects: funded research projects and research series, shown on their thread page and listed on Research. */
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
     title: z.string(),
     title_zh: z.string().optional(),
     theme: reference('themes'),
-    years: z.string().optional(),
-    summary: z.string(),
+    years: z.string().optional(),           // shown: "2011.02–2012.01"
+    start: z.number().int().optional(),     // start year, sorts funded projects newest first
+    summary: z.string().optional(),
     summary_zh: z.string().optional(),
     people: z.array(reference('people')).default([]),
     publications: z.array(reference('publications')).default([]),
-    image: z.string().optional(),
+    credit: z.string().optional(),          // one line on roles: "PI: … · Co-PIs: …"
+    credit_zh: z.string().optional(),
+    funder: z.string().optional(),          // funded projects
+    funder_zh: z.string().optional(),
+    grantId: z.string().optional(),
+    image: z.string().optional(),           // /images/projects/<id>.jpg, 4:3
     link: link.optional(),
-    order: z.number().default(100),
+    order: z.number().default(100),         // research series 0–9, funded projects 10
+    draft: z.boolean().default(false),      // not yet confirmed: hidden (shown with npm run dev:drafts)
   }),
 });
 

@@ -1,23 +1,30 @@
 ---
-/** Research: the five threads, each with its featured papers. Grouped by thread. */
+/** Research: the five threads, each with its projects (→ the thread page) and featured papers. */
 import Base from '../../../layouts/Base.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import PubTile from '../../../components/PubTile.astro';
 import { useTranslations, href, pick, langPaths, type Lang } from '../../../i18n/utils';
-import { threads, publicationsIn, featured } from '../../../lib/content';
+import { threads, publicationsIn, featured, projectsIn } from '../../../lib/content';
 
 export const getStaticPaths = langPaths;
 const lang = Astro.params.lang as Lang;
 const t = useTranslations(lang);
-const list = await Promise.all((await threads()).map(async (th) => ({ th, pubs: await featured(4, await publicationsIn(th.id)) })));
+const list = await Promise.all((await threads()).map(async (th) => ({ th, pubs: await featured(4, await publicationsIn(th.id)), projects: await projectsIn(th.id) })));
 ---
 
 <Base lang={lang} title={t('research.title')}>
   <PageHeader title={t('research.title')} lede={t('research.lede')} />
-  {list.map(({ th, pubs }) => (
+  {list.map(({ th, pubs, projects }) => (
     <section class="block" id={th.id}>
       <div class="head"><h2 class="sec"><span class="mark" style={`--mk:${th.data.color}`}></span><a href={href(lang, `research/${th.id}/`)}>{pick(th.data, 'name', lang)}</a></h2></div>
       <p class="block-desc">{pick(th.data, 'summary', lang)}</p>
+      {projects.length > 0 && (
+        <ul class="acts projects">
+          {projects.map((pr) => (
+            <li><div class="k">{t('research.projects')}{pr.data.years && ` · ${pr.data.years}`}</div><div class="t"><a href={href(lang, `research/${th.id}/`) + `#${pr.id}`}>{pick(pr.data, 'title', lang)}</a></div>{pr.data.funder && <div class="m">{pick(pr.data, 'funder', lang)}</div>}</li>
+          ))}
+        </ul>
+      )}
       <div class="grid">
         {pubs.map((p) => <PubTile pub={p} lang={lang} color={th.data.color} />)}
       </div>

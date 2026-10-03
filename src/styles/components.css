@@ -192,3 +192,6 @@ h1 .mark, h2.sec .mark { width: 0.3em; height: 0.3em; vertical-align: 0.2em; mar
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--sp-32) var(--sp-24); margin-top: var(--sp-64); }
 .gallery img { aspect-ratio: 4 / 3; object-fit: contain; }
 .paper-authors a:hover { text-decoration: underline; }
+
+/* research: a thread's projects above its papers */
+.acts.projects { margin: 0 0 var(--sp-24); }
