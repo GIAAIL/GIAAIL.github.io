@@ -1527,32 +1527,5 @@
     "venueShort": "編輯論文集",
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/e8aa",
     "theme": "form"
-  },
-  {
-    "id": "1996-hou-exploration-extending-communication",
-    "ref": "B44",
-    "type": "conference",
-    "year": 1996,
-    "authors": [
-      "June-Hao Hou"
-    ],
-    "title": "Exploration of Extending the Communication Range in the Virtual Design Process",
-    "venue": "1st International Conference of the Association for Computer-Aided Architectural Design Research in Asia (CAADRIA 1996)",
-    "venueShort": "CAADRIA 1996",
-    "location": "Hong Kong",
-    "locationZh": "香港",
-    "publisher": "Proceedings of CAADRIA 1996（CumInCAD）",
-    "pages": "299–305",
-    "doi": "10.52842/conf.caadria.1996.299",
-    "format": "全文論文",
-    "openAccess": true,
-    "apa": "Hou, J.-H. (1996). Exploration of Extending the Communication Range in the Virtual Design Process. In Proceedings of the 1st International Conference of the Association for Computer-Aided Architectural Design Research in Asia (CAADRIA 1996) (pp. 299–305). https://doi.org/10.52842/conf.caadria.1996.299",
-    "abstract": "Computer support for collaborative works (CSCW) and recently investigated virtual design studio (VDS) are reviewed. By involving into two design projects and examining the virtual design process, several technical and procedural problems are notified and discussed. A community reconstruction was proceeded in the second project to help local communities to build their network communication. This paper tries to construct guidelines for future virtual design process and addresses the possibilities of extending the communication range to local communities and users.",
-    "url": "https://papers.cumincad.org/cgi-bin/works/paper/8a8f",
-    "pdf": "https://papers.cumincad.org/data/works/att/8a8f.content.pdf",
-    "doiUrl": "https://doi.org/10.52842/conf.caadria.1996.299",
-    "theme": "xr",
-    "image": "/images/pubs/1996-hou-exploration-extending-communication.jpg",
-    "imageAlt": "Extending the communication range of the virtual design studio"
   }
 ]
