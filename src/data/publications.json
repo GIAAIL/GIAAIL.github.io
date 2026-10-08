@@ -605,8 +605,8 @@
     "title": "Adaptive Stiffness: A Biomimetic Robotic System with Tensegrity-Based Compliant Mechanism",
     "venue": "arXiv 2407.05053 [cs.RO]",
     "venueShort": "預印本（arXiv）",
-    "url": "https://arxiv.org/abs/2407.05053",
     "abstract": "Biomimicry has played a pivotal role in robotics. In contrast to rigid robots, bio-inspired robots exhibit an inherent compliance, facilitating versatile movements and operations in constrained spaces. The robot implementation in fabrication, however, has posed technical challenges and mechanical complexity, thereby underscoring a noticeable gap between research and practice. To address the limitation, the research draws inspiration from the unique musculoskeletal feature of vertebrate physiology, which displays significant capabilities for sophisticated locomotion. The research converts the biological paradigm into a tensegrity-based robotic system, which is formed by the design of rigid-flex coupling and a compliant mechanism. This integrated technique enables the robot to achieve a wide range of motions with variable stiffness and adaptability, holding great potential for advanced performance in ill-defined environments. In summation, the research aims to provide a robust foundation for tensegrity-based biomimetic robots in practice, enhancing the feasibility of undertaking intricate robotic constructions.",
+    "url": "https://arxiv.org/abs/2407.05053",
     "pdf": "https://arxiv.org/pdf/2407.05053",
     "theme": "fabrication",
     "image": "/images/pubs/2024-hsieh-adaptive-stiffness-biomimetic.jpg",
@@ -624,8 +624,8 @@
     "title": "Visualization and Optimization of Continuum Robots: Integration of Lie Group Kinematics and Evolutionary Algorithm",
     "venue": "arXiv 2410.14305 [cs.RO]",
     "venueShort": "預印本（arXiv）",
-    "url": "https://arxiv.org/abs/2410.14305",
     "abstract": "Continuum robots, known for their high flexibility and adaptability, offer immense potential for applications such as medical surgery, confined-space inspections, and wearable devices. However, their non-linear elastic nature and complex kinematics present significant challenges in digital modeling and visualization. Identifying the modal shape coefficients of specific robot configuration often requires plenty of physical experiments, which is time-consuming and robot-specific. To address this issue, this research proposes a computational framework that utilizes evolutionary algorithm (EA) to simplify the coefficient identification process. Our method starts by generating datasets using Lie group kinematics and physics-based simulations, defining both ideal configurations and models to be optimized. With the deployment of EA solver, the deviations were iteratively minimized through two fitness objectives —mean square error of shape deviation (MSE1 ) and tool center point (TCP) vector deviation (MSE2 ) —to align the robot’s backbone curve with the desired configuration. Built on the Computer-Aided Design (CAD) platform Grasshopper, this framework provides real-time visualization suitable for development of continuum robots. Results show that this integrated method achieves precise alignment and effective identification. Overall, the objective of this research aims to reduce the modeling complexity of continuum robots, enabling precise, efficient virtual simulation before robot programming and implementation.",
+    "url": "https://arxiv.org/abs/2410.14305",
     "pdf": "https://arxiv.org/pdf/2410.14305",
     "theme": "fabrication",
     "image": "/images/pubs/2024-hsieh-visualization-optimization-continuum.jpg",
@@ -1306,11 +1306,11 @@
     "authors": [
       "June-Hao Hou"
     ],
-    "role": "作者",
     "title": "在光影間囈語",
     "venue": "專書",
     "venueShort": "專書",
     "isbn": "9789860172409",
+    "role": "作者",
     "url": "https://orcid.org/0000-0002-8362-7719",
     "theme": "form"
   },
@@ -1327,10 +1327,10 @@
       "Chao-Chih Wang",
       "Chih-Yuan Lee"
     ],
-    "role": "共同作者",
     "title": "明日建築：實體－虛擬－互動－空間 (Architecture of Tomorrow: Physical-Virtual-Interactive-Space)",
     "venue": "專書（合著）",
     "venueShort": "專書（合著）",
+    "role": "共同作者",
     "url": "https://www.semanticscholar.org/paper/d9404c4f1151cc1643cacdba38e9581401065d6e",
     "theme": "form"
   },
@@ -1521,10 +1521,10 @@
       "Jin-Yeu Tsou",
       "June-Hao Hou"
     ],
-    "role": "共同編者",
     "title": "CAADRIA '97: Proceedings of the Second Conference on Computer Aided Architectural Design Research in Asia",
     "venue": "編輯論文集",
     "venueShort": "編輯論文集",
+    "role": "共同編者",
     "url": "https://papers.cumincad.org/cgi-bin/works/paper/e8aa",
     "theme": "form"
   }

@@ -1,4 +1,4 @@
-/** Display helpers for people and theses (data from data/people.xlsx). */
+/** Display helpers for people and theses (src/content/people, data/theses.json). */
 import type { CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/ui';
 import { getRelativeLocaleUrl } from 'astro:i18n';
@@ -12,7 +12,7 @@ export function displayName(p: PersonData, lang: Lang): string {
   return p.name;
 }
 
-/** Where a person's name links to: their own site first, then the profiles they listed. Undefined until one is filled in data/people.xlsx. */
+/** Where a person's name links to: their own site first, then the profiles they listed. Undefined until one is filled in. */
 const LINK_ORDER = ['website', 'linkedin', 'scholar', 'orcid', 'github', 'gitlab', 'instagram', 'nycu', 'cv'] as const;
 export function personalLink(p: PersonData): string | undefined {
   const links = p.links as Record<string, string | undefined>;

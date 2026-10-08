@@ -20,6 +20,6 @@ const meta = d.role === 'director' ? pick(d, 'title', lang) : d.years;
 const earlier = full ? theses : [];
 const affiliation = pick(d, 'affiliation', lang);   // current position elsewhere, shown everywhere (home included)
 const img = portrait ? imageIfExists(d.image) : null;
-const own = personalLink(d);   // the name links out once the person has a link in data/people.xlsx
+const own = personalLink(d);   // the name links out once the person has a link in their file
 ---
 <li id={full ? person.id : undefined}>{portrait && <div class="portrait">{img && <img src={img} alt="" width="600" height="750" loading="lazy" decoding="async" />}</div>}<div class="k">{role}</div><div class="t">{own ? <a href={own}>{name}</a> : name}</div>{meta && <div class="m">{meta}</div>}{earlier.length > 0 && <div class="m th">{earlier.map((x, i) => <>{i > 0 && '; '}<a href={thesisPage(x, lang)}>{degreeLine(x.data, lang)}</a></>)}</div>}{affiliation && <div class="m">{affiliation}</div>}{full && <PersonLinks person={person} lang={lang} />}</li>

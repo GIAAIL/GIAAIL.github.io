@@ -41,16 +41,20 @@ export async function threadById(): Promise<Record<string, Thread['data']>> {
 
 // ---------------------------------------------------------------- publications
 
-/** Workbook order inside a year: A (journal) < B (conference) < C < D, then by number. */
-function refKey(ref: string): [string, number] {
-  const m = ref.match(/^([A-Z]+)(\d+)$/);
-  return m ? [m[1], Number(m[2])] : [ref, 0];
+/**
+ * Order inside a year: journal < conference < book < other, then by the former NSTC catalogue number
+ * (A1, B3 …); papers added later have no number and follow, by title. Same order as scripts/lib/data.mjs.
+ */
+const TYPE_LETTER: Record<string, string> = { journal: 'A', conference: 'B', book: 'C', other: 'D' };
+function refKey(p: Pub): [string, number] {
+  const m = (p.data.ref ?? '').match(/^([A-Z]+)(\d+)$/);
+  return m ? [m[1], Number(m[2])] : [TYPE_LETTER[p.data.type] ?? 'Z', 1e6];
 }
 
 export function byRecency(a: Pub, b: Pub) {
-  const [la, na] = refKey(a.data.ref);
-  const [lb, nb] = refKey(b.data.ref);
-  return b.data.year - a.data.year || la.localeCompare(lb) || na - nb;
+  const [la, na] = refKey(a);
+  const [lb, nb] = refKey(b);
+  return b.data.year - a.data.year || la.localeCompare(lb) || na - nb || a.data.title.localeCompare(b.data.title);
 }
 
 export const publications = () => once('pubs', async () => (await getCollection('publications')).sort(byRecency));
@@ -84,7 +88,7 @@ export async function publicationsBySlug(ids: { id: string }[]) {
 }
 
 // ---------------------------------------------------------------- people and theses
-// Source: data/people.xlsx → scripts/ingest_people.py → src/content/people/*.md + src/data/theses.json
+// Source: src/content/people/*.md + data/theses.json → npm run data → src/data/theses.json
 
 export const ROLE_ORDER = ['director', 'faculty', 'postdoc', 'phd', 'master', 'researcher', 'assistant', 'alumni'] as const;
 
@@ -204,7 +208,7 @@ export async function aboutPage(lang: Lang) {
 
 // ---------------------------------------------------------------- home previews
 
-/** The home list: the papers ranked `featured` 1–6 in data/pub_meta.json, in that order (topped up with the newest). */
+/** The home list: the papers ranked `featured` 1–6 in data/publications.json, in that order (topped up with the newest). */
 export async function previewPublications() {
   const all = await publications();
   const ranked = all.filter((p) => p.data.featured).sort((a, b) => a.data.featured! - b.data.featured!);
